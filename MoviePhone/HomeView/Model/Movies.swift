@@ -8,6 +8,12 @@
 
 import Foundation
 
+public struct Movies: Codable {
+    let page: Int
+    let totalPages: Int
+    let data: [Movie]
+}
+
 public struct Movie: Codable {
     let title: String
     let id: Int

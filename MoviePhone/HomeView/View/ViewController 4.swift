@@ -9,16 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    private let viewModel = DIFactory().movieHomeViewModel()
 
+    private let viewModel = DIFactory().movieHomeViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         viewModel.populateData()
     }
-    
-    
+
 
 }
 

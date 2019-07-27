@@ -10,8 +10,7 @@ import UIKit
 
 class MovieHomeViewModel: NSObject {
     private let movieServices: MovieServices
-    private var currentPage = 1
-    var movies: Movies?
+    private var page = 1
     
     init(services: MovieServices) {
         movieServices = services
@@ -19,23 +18,15 @@ class MovieHomeViewModel: NSObject {
     }
     
     func populateData() {
-        currentPage = 1
-        fetchMovies(page: currentPage)
-    }
-    
-    func fetchAdditionalData() {
-        currentPage += 1
-        fetchMovies(page: currentPage)
+        
     }
     
     func fetchMovies(page: Int) {
-        movieServices.nowPlaying(page: page, completion: { [weak self] result in
-            guard let self = self else { return }
+        movieServices.nowPlaying(page: page, completion: { result in
             switch result {
             case .success(let data):
                 do {
-                    self.movies = try? JSONDecoder().decode(Movies.self, from: data)
-                    print("Model = \(String(describing: self.movies))")
+                    //                    let movies = try JSONDecoder().decode([Movie].self, from: data)
                     
                     // remove
                     let testMovies = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)

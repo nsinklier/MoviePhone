@@ -3,4 +3,22 @@
    uuid = "653F3EFE-19CD-4C7C-B791-E81ECA697653"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../../../System/Volumes/Data/Users/nicksinklier/Library/CloudStorage/iCloud Drive/Desktop/MoviePhone/MoviePhone/HomeView/ViewModel/MovieHomeViewModel.swift"
+            timestampString = "585948185.636045"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "fetchMovies(page:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

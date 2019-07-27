@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+struct DIFactory {
+    func movieHomeViewModel() -> MovieHomeViewModel {
+        return MovieHomeViewModel(services: movieServices())
+    }
+    
+    func movieServices() -> MovieServices {
+        return MovieServices(urlFactory: urlFactory())
+    }
+    
+    func urlFactory() -> URLFactory {
+        return URLFactory()
+    }
+}
