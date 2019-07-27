@@ -21,6 +21,7 @@ public struct Movie: Codable {
     let imagePath: String
     let genreIDs: Array<Int>
     let releaseDate: String
+    let overView: String
 }
 
 extension Movie {
@@ -32,7 +33,7 @@ extension Movie {
             var posterPath: String
             var genreIDs: Array<Int>
             var releaseDate: String
-            var overview = ""
+            var overview: String
         }
         var movieData: Attributes
     }
@@ -46,7 +47,8 @@ extension Movie.CodingData {
             rating: movieData.voteAverage,
             imagePath: movieData.posterPath,
             genreIDs: movieData.genreIDs,
-            releaseDate: movieData.releaseDate)
+            releaseDate: movieData.releaseDate,
+            overView: movieData.overview)
     }
 }
 
