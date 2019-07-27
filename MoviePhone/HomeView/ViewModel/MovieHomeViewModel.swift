@@ -23,9 +23,12 @@ class MovieHomeViewModel: NSObject {
         fetchMovies(page: currentPage)
     }
     
-    func fetchAdditionalData() {
+    func fetchAdditionalData() -> Bool {
+        guard currentPage < movies?.totalPages ?? 0 else { return false }
+            
         currentPage += 1
         fetchMovies(page: currentPage)
+        return true
     }
     
     func fetchMovies(page: Int) {
@@ -43,6 +46,7 @@ class MovieHomeViewModel: NSObject {
                 } catch {
                     print("JSON decoding error")
                 }
+                
             case .failure(let error):
                 print("\(error)")
             }

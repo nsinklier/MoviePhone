@@ -9,14 +9,11 @@
 import Foundation
 
 struct URLFactory {
-    // base
     private let baseURL = "https://api.themoviedb.org/3/movie/"
     private let imageBaseURL = "https://image.tmdb.org/t/p/w500"
     
-    // search
     private let nowPlaying = "now_playing"
     
-    // parameters
     private let apiKey = "api_key=789a3ad9fb130b33628be0e27eaf57c8"
     private let language = "language=en-US"
     private let popularOrder = "sort_by=popularity.desc"
@@ -38,11 +35,8 @@ struct URLFactory {
  
  nowPlaying = /movie/now_playing
  baseURL = https://api.themoviedb.org/3
+ 
 */
-
-/*
- releaseDate = release_date.gte=2018-12-24&release_date.lte=2019-01-31
- */
 
 /*
  Image URL

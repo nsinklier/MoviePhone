@@ -32,6 +32,7 @@ extension Movie {
             var posterPath: String
             var genreIDs: Array<Int>
             var releaseDate: String
+            var overview = ""
         }
         var movieData: Attributes
     }
