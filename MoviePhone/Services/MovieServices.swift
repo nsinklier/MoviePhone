@@ -48,10 +48,3 @@ class MovieServices: NSObject {
     }
 }
 
-
-
-// URL: https://api.themoviedb.org/3/movie/now_playing?api_key=789a3ad9fb130b33628be0e27eaf57c8&language=en-US
-
-// https://api.themoviedb.org/3/discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22&page=1&api_key=64b6f3a69e5717b13ed8a56fe4417e71
-
-// _url : http://api.themoviedb.org/3/discover/movie?api_key=57a4269b6c0098d52f01d65572e57972&sort_by=popularity.desc

@@ -11,13 +11,16 @@ import Foundation
 struct URLFactory {
     private let baseURL = "https://api.themoviedb.org/3/movie/"
     private let imageBaseURL = "https://image.tmdb.org/t/p/w500"
-    private let apiKey = "api_key=789a3ad9fb130b33628be0e27eaf57c8"
-    private let language = "language=en-US"
     
     private let nowPlaying = "now_playing"
     
+    private let apiKey = "api_key=789a3ad9fb130b33628be0e27eaf57c8"
+    private let language = "language=en-US"
+    private let popularOrder = "sort_by=popularity.desc"
+    
+    
     func nowPlayingURL(page: Int) -> URL? {
-        return URL(string: baseURL + nowPlaying + "?" + apiKey + "&" + language + "&" + "page=\(page)")
+        return URL(string: baseURL + nowPlaying + "?" + apiKey + "&" + language + "&" + popularOrder + "&" + "page=\(page)")
     }
     
     func movieDetails(id: Int) -> URL? {

@@ -43,6 +43,7 @@ class MovieHomeViewModel: NSObject {
                 } catch {
                     print("JSON decoding error")
                 }
+                
             case .failure(let error):
                 print("\(error)")
             }
