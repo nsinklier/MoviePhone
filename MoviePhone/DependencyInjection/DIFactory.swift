@@ -10,7 +10,7 @@ import Foundation
 
 struct DIFactory {
     func movieHomeViewModel() -> MovieHomeViewModel {
-        return MovieHomeViewModel(services: movieServices())
+        return MovieHomeViewModel(services: movieServices(), dataSource: moviesDataSource())
     }
     
     func movieServices() -> MovieServices {
@@ -19,5 +19,9 @@ struct DIFactory {
     
     func urlFactory() -> URLFactory {
         return URLFactory()
+    }
+    
+    func moviesDataSource() -> MoviesDataSource {
+        return MoviesDataSource()
     }
 }

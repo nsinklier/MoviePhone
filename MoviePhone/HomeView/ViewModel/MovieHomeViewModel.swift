@@ -10,11 +10,12 @@ import UIKit
 
 class MovieHomeViewModel: NSObject {
     private let movieServices: MovieServices
+    private let moviesDataSource: MoviesDataSource
     var movies: Movies?
-    let dataSource = MoviesDataSource()
     
-    init(services: MovieServices) {
+    init(services: MovieServices, dataSource: MoviesDataSource) {
         movieServices = services
+        moviesDataSource = dataSource
         super.init()
     }
     
@@ -49,12 +50,12 @@ class MovieHomeViewModel: NSObject {
                         print("\tImagePath: \(movie.image)")
                         
                         guard let url = URLFactory().movieImage(imagePath: movie.image) else { return }
-                        guard let data = try? Data(contentsOf: url) else { return }
-                        let image = UIImage(data: data)
-                        movieCellData.append(MovieCellData(title: movie.title, image: image))
+                        self.fetchImage(url: url, completion: { [weak self] image in
+                            guard let self = self else { return }
+                            movieCellData.append(MovieCellData(title: movie.title, image: image))
+                            self.moviesDataSource.movieData.append(contentsOf: movieCellData)
+                        })
                     }
-                
-                    self.dataSource.movieData.append(contentsOf: movieCellData)
                 
                     // uncomment below lines for debugging
 //                    let rawJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
@@ -63,6 +64,16 @@ class MovieHomeViewModel: NSObject {
                 print("\(error)")
             }
         })
+    }
+    
+    // Add an imageCache <String: UIImage> instead of using a block here
+    // Move out to another ImageCache class
+    func fetchImage(url: URL, completion: @escaping (_ image: UIImage) -> Void) {
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            guard let image = UIImage(data: data) else { return }
+            completion(image)
+        }
     }
 }
 
