@@ -11,6 +11,7 @@ import UIKit
 class MovieHomeViewModel: NSObject {
     private let movieServices: MovieServices
     var movies: Movies?
+    let dataSource = MoviesDataSource()
     
     init(services: MovieServices) {
         movieServices = services
@@ -39,13 +40,22 @@ class MovieHomeViewModel: NSObject {
                         return
                     }
                     
+                    var movieCellData = [MovieCellData]()
                     print("Page: \(movies.page) of \(movies.totalPages)")
                     for movie in movies.movies {
                         print("Title: \(movie.title)")
                         print("\tID: \(movie.id)")
                         print("\tGenres: \(movie.genres)")
                         print("\tImagePath: \(movie.image)")
+                        
+                        guard let url = URLFactory().movieImage(imagePath: movie.image) else { return }
+                        guard let data = try? Data(contentsOf: url) else { return }
+                        let image = UIImage(data: data)
+                        movieCellData.append(MovieCellData(title: movie.title, image: image))
                     }
+                
+                    self.dataSource.movieData.append(contentsOf: movieCellData)
+                
                     // uncomment below lines for debugging
 //                    let rawJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
 //                    print("Data: \(String(describing: rawJSON))"
@@ -54,5 +64,9 @@ class MovieHomeViewModel: NSObject {
             }
         })
     }
+}
 
+struct MovieCellData {
+    let title: String
+    let image: UIImage?
 }

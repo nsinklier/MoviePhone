@@ -11,7 +11,8 @@ import Foundation
 struct URLFactory {
     // base
     private let baseURL = "https://api.themoviedb.org/3/movie/"
-    private let imageBaseURL = "https://image.tmdb.org/t/p/w500"
+    // sizes 92, 154", 185, 342, 500, 780
+    private let imageBaseURL = "https://image.tmdb.org/t/p/w185"
     
     // search
     private let nowPlaying = "now_playing"
@@ -28,6 +29,10 @@ struct URLFactory {
     
     func movieDetails(id: Int) -> URL? {
         return URL(string: baseURL + String(id) + "?" + apiKey + "&" + language)
+    }
+    
+    func movieImage(imagePath: String) -> URL? {
+        return URL(string: imageBaseURL + imagePath)
     }
 }
 
