@@ -10,7 +10,7 @@ import UIKit
 
 class MovieHomeViewModel: NSObject {
     private let movieServices: MovieServices
-    private let moviesDataSource: MoviesDataSource
+    var moviesDataSource: MoviesDataSource
     var movies: Movies?
     
     init(services: MovieServices, dataSource: MoviesDataSource) {
