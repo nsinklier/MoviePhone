@@ -27,7 +27,7 @@ struct URLFactory {
     }
     
     func movieDetails(id: Int) -> URL? {
-        return URL(string: baseURL + String(id) + "?" + apiKey + language)
+        return URL(string: baseURL + String(id) + "?" + apiKey + "&" + language)
     }
 }
 

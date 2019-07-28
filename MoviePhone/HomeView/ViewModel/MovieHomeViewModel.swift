@@ -10,7 +10,6 @@ import UIKit
 
 class MovieHomeViewModel: NSObject {
     private let movieServices: MovieServices
-    private var currentPage = 1
     var movies: Movies?
     
     init(services: MovieServices) {
@@ -19,15 +18,13 @@ class MovieHomeViewModel: NSObject {
     }
     
     func populateData() {
-        currentPage = 1
-        fetchMovies(page: currentPage)
+        fetchMovies(page: 1)
     }
     
     func fetchAdditionalData() -> Bool {
-        guard currentPage < movies?.totalPages ?? 0 else { return false }
-            
-        currentPage += 1
-        fetchMovies(page: currentPage)
+        guard let movies = movies, movies.page < movies.totalPages else { return false }
+        
+        fetchMovies(page: movies.page + 1)
         return true
     }
     
@@ -36,17 +33,22 @@ class MovieHomeViewModel: NSObject {
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                do {
                     self.movies = try? JSONDecoder().decode(Movies.self, from: data)
-                    print("Model = \(String(describing: self.movies))")
+                    guard let movies = self.movies else {
+                        print("JSON decoding error")
+                        return
+                    }
                     
-                    // remove
-                    let testMovies = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                    print("Data: \(String(describing: testMovies))")
-                } catch {
-                    print("JSON decoding error")
-                }
-                
+                    print("Page: \(movies.page) of \(movies.totalPages)")
+                    for movie in movies.movies {
+                        print("Title: \(movie.title)")
+                        print("\tID: \(movie.id)")
+                        print("\tGenres: \(movie.genres)")
+                        print("\tImagePath: \(movie.image)")
+                    }
+                    // uncomment below lines for debugging
+//                    let rawJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+//                    print("Data: \(String(describing: rawJSON))"
             case .failure(let error):
                 print("\(error)")
             }
