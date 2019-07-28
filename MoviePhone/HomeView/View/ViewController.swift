@@ -11,14 +11,25 @@ import UIKit
 class ViewController: UIViewController {
     
     private let viewModel = DIFactory().movieHomeViewModel()
-
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.populateData()
+        
+        
     }
     
+    func populateData() {
+        viewModel.populateData()
+        
+    }
     
+}
 
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width/2, height: 400)
+    }
 }
 
